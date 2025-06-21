@@ -29,7 +29,7 @@ const App = () => {
 export default App;
 
 const Root = () => {
-    const isAuthenticate = localStorage.get("token");
+    const isAuthenticate = localStorage.getItem("token");
     return isAuthenticate ? (
         <Navigate to={"/dashboard"} />
     ) : (
