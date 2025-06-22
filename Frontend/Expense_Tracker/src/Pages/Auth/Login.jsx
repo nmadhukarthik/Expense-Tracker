@@ -13,7 +13,6 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
         if (!validateEmail(email)) {
             setError("Enter a valid email address");
             return;
