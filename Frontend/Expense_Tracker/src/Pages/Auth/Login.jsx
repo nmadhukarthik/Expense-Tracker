@@ -34,14 +34,14 @@ const Login = () => {
                 <h3 className="text-xl font-semibold text-black">
                     Welcome back!
                 </h3>
-                <p className="text-xs text-slate-700 mt-[px] mb-6">
+                <p className="text-xs text-slate-700 mt-[5px] mb-6">
                     Please enter your details to login
                 </p>
 
                 <form onSubmit={handleLogin}>
                     <Input
                         value={email}
-                        onChange={({ target }) => setEmail(target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         label="Email Address"
                         placeholder="aria@gmail.com"
                         type="text"
@@ -49,7 +49,7 @@ const Login = () => {
 
                     <Input
                         value={password}
-                        onChange={({ target }) => setPassword(target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         label="Password "
                         placeholder="Minimum 8 characters"
                         type="password"

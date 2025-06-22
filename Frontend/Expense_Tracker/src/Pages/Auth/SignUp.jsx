@@ -17,17 +17,19 @@ const SignUp = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
 
+        let profileImageUrl = "";
+
         if (!fullName) {
-            setError("Enter a full name");
-            return;
+            return setError("Please enter your name");
+            // return;
         }
         if (!validateEmail(email)) {
-            setError("Enter a valid email address");
-            return;
+            return setError("Please enter a valid email address");
+            // return;
         }
         if (!password) {
-            setError("Enter a password");
-            return;
+            return setError("Please enter a password");
+            // return;
         }
 
         setError("");
@@ -37,7 +39,7 @@ const SignUp = () => {
     return (
         <AuthLayout>
             <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-                <h3 className="text-xl fonr-semibold text-black">
+                <h3 className="text-xl font-semibold text-black">
                     Create an account
                 </h3>
                 <p className="text-xs text-slate-700 mt-[5px] mb-6">
@@ -52,7 +54,7 @@ const SignUp = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Input
                             value={fullName}
-                            onChange={(target) => setFullName(target.value)}
+                            onChange={(e) => setFullName(e.target.value)}
                             label="Full Name"
                             placeholder="Enter your name"
                             type="text"
@@ -60,7 +62,7 @@ const SignUp = () => {
 
                         <Input
                             value={email}
-                            onChange={(target) => setEmail(target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                             label="Email"
                             placeholder="aria@gmail.com"
                             type="text"
@@ -69,7 +71,7 @@ const SignUp = () => {
                         <div className="col-span-2">
                             <Input
                                 value={password}
-                                onChange={(target) => setPassword(target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 label="Password"
                                 placeholder="Minimum 8 characters"
                                 type="password"
@@ -86,7 +88,7 @@ const SignUp = () => {
                     </button>
 
                     <p className="text-[13px] text-slate-800 mt-3">
-                        Already have an account?
+                        Already have an account?{" "}
                         <Link
                             to="/login"
                             className="font-medium text-primary underline"
