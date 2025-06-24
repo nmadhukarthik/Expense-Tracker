@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
+
 const ProfilePhotoSelector = ({ image, setImage }) => {
     const inputRef = useRef(null);
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -24,6 +25,14 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
         inputRef.current.click();
     };
 
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
+
     return (
         <div className="flex justify-center mb-6">
             <input
@@ -32,6 +41,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
                 ref={inputRef}
                 onChange={handleImageChange}
                 className="hidden"
+                label="Full Name"
             />
 
             {!image ? (
