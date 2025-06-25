@@ -4,7 +4,7 @@ import {
     loginUser,
     getUserInfo,
 } from "../controllers/authController.js";
-import protect from "../middlewares/authMiddleware.js";
+import protect from "../middlewares/authoriseMiddleware.js";
 
 const router = express.Router();
 
