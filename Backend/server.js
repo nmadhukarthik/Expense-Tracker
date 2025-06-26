@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 
@@ -21,6 +22,13 @@ app.use(
 connectDB();
 
 app.use("/api/v1/auth", authRoutes);
+
+// Fix __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from /uploads (Server uploads folder)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
