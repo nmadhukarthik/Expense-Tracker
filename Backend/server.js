@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import incomeRoutes from "./routes/incomeRoutes.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(
 connectDB();
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/income", incomeRoutes);
 
 // Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
