@@ -101,16 +101,15 @@ const SignUp = () => {
                             placeholder="aria@gmail.com"
                             type="text"
                         />
-
-                        <div className="col-span-2">
-                            <Input
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                label="Password"
-                                placeholder="Minimum 8 characters"
-                                type="password"
-                            />
-                        </div>
+                    </div>
+                    <div className="col-span-2">
+                        <Input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            label="Password"
+                            placeholder="Minimum 8 characters"
+                            type="password"
+                        />
                     </div>
 
                     {error && (
@@ -121,11 +120,11 @@ const SignUp = () => {
                         SIGNUP
                     </button>
 
-                    <p className="text-[13px] text-slate-800 mt-3">
+                    <p className="text-[15px] text-slate-800 mt-3">
                         Already have an account?{" "}
                         <Link
                             to="/login"
-                            className="font-medium text-primary underline"
+                            className="font-medium text-[#0c3270] underline"
                         >
                             Login
                         </Link>

@@ -25,5 +25,19 @@
 }
 
 .btn-primary {
-    @apply w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600;
+    @apply w-full text-sm font-medium text-white bg-[#0c3270] shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-blue-100 hover:text-[#0b61e5];
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
 }
