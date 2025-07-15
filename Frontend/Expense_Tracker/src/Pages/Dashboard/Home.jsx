@@ -4,6 +4,12 @@ import { useUserAuth } from "../../Hooks/useUserAuth";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Utils/axiosInstance";
 import { API_PATHS } from "../../Utils/apiPaths";
+import InfoCard from "../../Components/Cards/InfoCard";
+
+import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
+import { IoMdCard } from "react-icons/io";
+import { addThousandsSeperator } from "../../Utils/helper";
+import RecentTransactions from "../../Components/Dashboard/RecentTransactions";
 
 const Home = () => {
     useUserAuth();
@@ -39,7 +45,42 @@ const Home = () => {
 
     return (
         <DashboardLayout activeMenu="Dashboard">
-            <div className="my-5 mx-auto">Home </div>
+            <div className="my-5 mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <InfoCard
+                        icon={<IoMdCard />}
+                        label="Total Balance"
+                        value={addThousandsSeperator(
+                            dashboardData?.totalBalance || 0
+                        )}
+                        color="bg-primary"
+                    />
+
+                    <InfoCard
+                        icon={<LuWalletMinimal />}
+                        label="Total Income"
+                        value={addThousandsSeperator(
+                            dashboardData?.totalIncome || 0
+                        )}
+                        color="bg-green-500"
+                    />
+
+                    <InfoCard
+                        icon={<LuHandCoins />}
+                        label="Total Expense"
+                        value={addThousandsSeperator(
+                            dashboardData?.totalExpense || 0
+                        )}
+                        color="bg-red-500"
+                    />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <RecentTransactions
+                        transactions={dashboardData?.recentTransactions}
+                        onSeeMore={() => navigate("/expense")}
+                    />
+                </div>
+            </div>
         </DashboardLayout>
     );
 };
