@@ -10,6 +10,10 @@ import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import { addThousandsSeperator } from "../../Utils/helper";
 import RecentTransactions from "../../Components/Dashboard/RecentTransactions";
+import FinancialOverview from "../../Components/Dashboard/FinancialOverview";
+import ExpenseTransactions from "../../Components/Dashboard/ExpenseTransactions";
+import Last30DaysExpenses from "../../Components/Dashboard/Last30DaysExpenses";
+import RecentIncomeWithChart from "../../Components/Dashboard/RecentIncomeWithChart";
 
 const Home = () => {
     useUserAuth();
@@ -78,6 +82,33 @@ const Home = () => {
                     <RecentTransactions
                         transactions={dashboardData?.recentTransactions}
                         onSeeMore={() => navigate("/expense")}
+                    />
+                    <FinancialOverview
+                        totalBalance={dashboardData?.totalBalance || 0}
+                        totalIncome={dashboardData?.totalIncome || 0}
+                        totalExpense={dashboardData?.totalExpense || 0}
+                    />
+                    <ExpenseTransactions
+                        transactions={
+                            dashboardData?.last30DaysExpenses?.transactions ||
+                            []
+                        }
+                        onSeeMore={() => navigate("/expense")}
+                    />
+                    <Last30DaysExpenses
+                        data={
+                            dashboardData?.last30DaysExpenses?.transactions ||
+                            []
+                        }
+                    />
+                    <RecentIncomeWithChart
+                        data={
+                            dashboardData?.last60DaysIncome?.transactions.slice(
+                                0,
+                                4
+                            ) || []
+                        }
+                        totalIncome={dashboardData?.totalIncome || 0}
                     />
                 </div>
             </div>

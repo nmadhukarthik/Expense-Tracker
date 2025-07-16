@@ -7,7 +7,6 @@ import {
 } from "react-icons/lu";
 
 const TransactionInfoCard = ({
-    key,
     icon,
     title,
     date,

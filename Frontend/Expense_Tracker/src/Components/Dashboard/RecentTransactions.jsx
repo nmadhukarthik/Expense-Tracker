@@ -23,7 +23,7 @@ const RecentTransactions = ({ transactions, onSeeMore }) => {
                                 : item.source
                         }
                         icon={item.icon}
-                        date={moment(item.date).format("D0 MMM YYYY")}
+                        date={moment(item.date).format("Do MMM YYYY")}
                         amount={item.amount}
                         type={item.type}
                         hideDeleteBtn
