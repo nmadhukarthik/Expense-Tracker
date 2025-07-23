@@ -7,6 +7,7 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
     const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
+        console.log("Transactions passed to IncomeOverview:", transactions);
         const result = prepareIncomeChartData(transactions);
         setChartData(result);
         return () => {};
@@ -28,7 +29,13 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
             </div>
 
             <div className="mt-10">
-                <CustomBarChart data={chartData} />
+                {chartData.length === 0 ? (
+                    <div className="text-gray-400 text-center">
+                        No income data to display
+                    </div>
+                ) : (
+                    <CustomBarChart data={chartData} />
+                )}
             </div>
         </div>
     );

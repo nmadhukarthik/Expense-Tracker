@@ -37,7 +37,7 @@ const Login = () => {
                 password,
             });
             const { token, user } = response.data;
-
+            console.log(user);
             if (token) {
                 localStorage.setItem("token", token);
                 updateUser(user);

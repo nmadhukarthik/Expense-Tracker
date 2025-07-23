@@ -5,6 +5,7 @@ import axiosInstance from "../../Utils/axiosInstance";
 import { API_PATHS } from "../../Utils/apiPaths";
 import Modal from "../../Components/Modal";
 import AddIncomeForm from "../../Components/Income/AddIncomeForm";
+import toast from "react-hot-toast";
 
 const Income = () => {
     const [incomeData, setIncomeData] = useState([]);
@@ -13,7 +14,7 @@ const Income = () => {
         show: false,
         data: null,
     });
-    const [openAddIncomeModal, setOpenAddIncomeModal] = useState(true);
+    const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
 
     // Get all incomes details
     const fetchIncomeDetails = async () => {
@@ -24,6 +25,7 @@ const Income = () => {
             const response = await axiosInstance.get(
                 API_PATHS.INCOME.GET_ALL_INCOME
             );
+            console.log("Fetched income:", response.data);
             if (response.data) {
                 setIncomeData(response.data);
             }
@@ -35,7 +37,41 @@ const Income = () => {
     };
 
     // Add Income
-    const handleAddIncome = async (income) => {};
+    const handleAddIncome = async (income) => {
+        const { source, amount, date, icon } = income;
+
+        // validation checks
+        if (!source.trim()) {
+            toast.error("Source is required.");
+            return;
+        }
+        if (!amount || isNaN(amount) || Number(amount) === 0) {
+            toast.error("Amount should be a valid number greater then 0.");
+            return;
+        }
+        if (!date) {
+            toast.error("Date is required.");
+            return;
+        }
+
+        try {
+            await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
+                source,
+                amount,
+                date,
+                icon,
+            });
+
+            setOpenAddIncomeModal(false);
+            toast.success("Income added successfully");
+            fetchIncomeDetails();
+        } catch (error) {
+            console.error(
+                "Error adding income:",
+                error.response?.data?.message || error.message
+            );
+        }
+    };
 
     // Delete Income
     const deleteIncome = async (id) => {};
@@ -48,16 +84,23 @@ const Income = () => {
 
         return () => {};
     }, []);
+    console.log("IncomeData before render:", incomeData);
 
     return (
         <DashboardLayout activeMenu="Income">
             <div className="my-5 mx-auto">
                 <div className="grid grid-cols-1 gap-6">
                     <div className="">
-                        <IncomeOverview
-                            transactions={incomeData}
-                            onAddIncome={() => setOpenAddIncomeModal(true)}
-                        />
+                        {loading ? (
+                            <div className="text-center py-10 text-gray-400">
+                                Loading income data...
+                            </div>
+                        ) : (
+                            <IncomeOverview
+                                transactions={incomeData}
+                                onAddIncome={() => setOpenAddIncomeModal(true)}
+                            />
+                        )}
                     </div>
                 </div>
 
