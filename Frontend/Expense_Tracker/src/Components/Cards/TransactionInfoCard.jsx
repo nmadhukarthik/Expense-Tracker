@@ -13,6 +13,7 @@ const TransactionInfoCard = ({
     amount,
     type,
     hideDeleteBtn,
+    onDelete,
 }) => {
     const getAmountStyles = () => {
         // Or u can write this arrow func without {} for implicit return behaviour
