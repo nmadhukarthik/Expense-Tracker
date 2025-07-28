@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import AuthLayout from "../../Components/Layouts/AuthLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Input from "../../Components/Inputs/Input";
 import { validateEmail } from "../../Utils/helper";
 import axiosInstance from "../../Utils/axiosInstance";
@@ -13,7 +13,7 @@ const Login = () => {
     const [error, setError] = useState("");
 
     const { updateUser } = useContext(userContext);
-
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -39,6 +39,17 @@ const Login = () => {
             const { token, user } = response.data;
             console.log(user);
             if (token) {
+                // setTimeout(() => {
+                //     if (
+                //         window.location.pathname === "/login" ||
+                //         window.location.pathname === "/signup"
+                //     ) {
+                //         navigate("/dashboard");
+                //         window.location.reload();
+                //     } else {
+                //         window.location.reload();
+                //     }
+                // }, 1000);
                 localStorage.setItem("token", token);
                 updateUser(user);
                 navigate("/dashboard");

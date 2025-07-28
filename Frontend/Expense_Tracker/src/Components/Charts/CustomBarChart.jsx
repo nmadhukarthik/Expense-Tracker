@@ -6,7 +6,6 @@ import {
     YAxis,
     XAxis,
     CartesianGrid,
-    Legend,
     Cell,
     Tooltip,
     ResponsiveContainer,

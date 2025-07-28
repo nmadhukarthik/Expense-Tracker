@@ -14,13 +14,43 @@ import UserProvider from "./Context/UserContext";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
+    const isAuthenticate = Boolean(localStorage.getItem("token"));
     return (
         <UserProvider>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Root />} />
-                    <Route path="/login" exact element={<Login />} />
-                    <Route path="/signup" exact element={<SignUp />} />
+                    <Route
+                        path="/"
+                        element={
+                            isAuthenticate ? (
+                                <Navigate to={"/dashboard"} />
+                            ) : (
+                                <Navigate to={"/login"} />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/login"
+                        exact
+                        element={
+                            !isAuthenticate ? (
+                                <Login />
+                            ) : (
+                                <Navigate to="/dashboard" />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/signup"
+                        exact
+                        element={
+                            !isAuthenticate ? (
+                                <SignUp />
+                            ) : (
+                                <Navigate to="/dashboard" />
+                            )
+                        }
+                    />
                     <Route path="/dashboard" exact element={<Home />} />
                     <Route path="/income" exact element={<Income />} />
                     <Route path="/expense" exact element={<Expense />} />
@@ -40,12 +70,3 @@ const App = () => {
 };
 
 export default App;
-
-const Root = () => {
-    const isAuthenticate = localStorage.getItem("token");
-    return isAuthenticate ? (
-        <Navigate to={"/dashboard"} />
-    ) : (
-        <Navigate to={"/login"} />
-    );
-};

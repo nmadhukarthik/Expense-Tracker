@@ -18,11 +18,35 @@ export const getInitials = (name) => {
     return initials.toUpperCase();
 };
 
-export const addThousandsSeperator = (num) => {
+export const addThousandsSeperator1 = (num) => {
+    console.log("Input to addThousandsSeperator:", num);
     if (num === null || isNaN(num)) return "";
 
     const [integerPart, fractionalPart] = num.toString().split(".");
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!d))/g, ",");
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return fractionalPart
+        ? `${formattedInteger}.${fractionalPart}`
+        : formattedInteger;
+};
+
+export const addThousandsSeperator = (num) => {
+    console.log("Input to addThousandsSeperator:", num);
+
+    if (num === null || num === undefined) return "";
+
+    // Remove all characters except digits and decimal point
+    const cleaned = String(num).replace(/[^\d.]/g, "");
+
+    const numberValue = Number(cleaned);
+
+    if (isNaN(numberValue)) {
+        console.warn("Invalid number after cleaning:", cleaned);
+        return "";
+    }
+
+    const [integerPart, fractionalPart] = numberValue.toString().split(".");
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     return fractionalPart
         ? `${formattedInteger}.${fractionalPart}`

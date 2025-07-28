@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import CustomTooltip from "./CustomTooltip";
 import CustomLegend from "./CustomLegend";
+import { addThousandsSeperator } from "../../Utils/helper";
 
 const CustomPieChart = ({
     data,
@@ -18,6 +19,9 @@ const CustomPieChart = ({
     colors,
     showTextAnchor,
 }) => {
+    console.log("totalAmount:", totalAmount);
+    const amount = addThousandsSeperator(totalAmount);
+    console.log(amount);
     return (
         <ResponsiveContainer width="100%" height={380}>
             <PieChart>
@@ -42,7 +46,7 @@ const CustomPieChart = ({
                         <Label
                             position="center"
                             content={() => (
-                                <>
+                                <g>
                                     <text
                                         x="50%"
                                         y="50%"
@@ -62,9 +66,9 @@ const CustomPieChart = ({
                                         fontSize="24px"
                                         fontWeight="600"
                                     >
-                                        {totalAmount}
+                                        ${amount}
                                     </text>
-                                </>
+                                </g>
                             )}
                         />
                     )}

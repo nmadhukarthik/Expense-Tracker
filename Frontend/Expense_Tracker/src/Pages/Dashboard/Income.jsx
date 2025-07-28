@@ -6,7 +6,6 @@ import { API_PATHS } from "../../Utils/apiPaths";
 import Modal from "../../Components/Modal";
 import AddIncomeForm from "../../Components/Income/AddIncomeForm";
 import toast from "react-hot-toast";
-import { data } from "react-router-dom";
 import IncomeList from "../../Components/Income/IncomeList";
 import DeleteAlert from "../../Components/DeleteAlert";
 
@@ -118,7 +117,6 @@ const Income = () => {
 
         return () => {};
     }, []);
-    console.log("IncomeData before render:", incomeData);
 
     return (
         <DashboardLayout activeMenu="Income">
