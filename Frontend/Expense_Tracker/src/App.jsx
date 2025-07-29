@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     BrowserRouter as Router,
     Routes,
@@ -10,11 +10,13 @@ import SignUp from "./Pages/Auth/SignUp";
 import Home from "./Pages/Dashboard/Home";
 import Income from "./Pages/Dashboard/Income";
 import Expense from "./Pages/Dashboard/Expense";
-import UserProvider from "./Context/UserContext";
+import UserProvider, { userContext } from "./Context/UserContext";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-    const isAuthenticate = Boolean(localStorage.getItem("token"));
+    const { user, loading } = useContext(userContext);
+
+    if (loading) return <div>Loading...</div>; // prevents redirect loop
     return (
         <UserProvider>
             <Router>
@@ -22,33 +24,21 @@ const App = () => {
                     <Route
                         path="/"
                         element={
-                            isAuthenticate ? (
-                                <Navigate to={"/dashboard"} />
-                            ) : (
-                                <Navigate to={"/login"} />
-                            )
+                            <Navigate to={user ? "/dashboard" : "/login"} />
                         }
                     />
                     <Route
                         path="/login"
                         exact
                         element={
-                            !isAuthenticate ? (
-                                <Login />
-                            ) : (
-                                <Navigate to="/dashboard" />
-                            )
+                            user ? <Navigate to="/dashboard" /> : <Login />
                         }
                     />
                     <Route
                         path="/signup"
                         exact
                         element={
-                            !isAuthenticate ? (
-                                <SignUp />
-                            ) : (
-                                <Navigate to="/dashboard" />
-                            )
+                            !user ? <SignUp /> : <Navigate to="/dashboard" />
                         }
                     />
                     <Route path="/dashboard" exact element={<Home />} />

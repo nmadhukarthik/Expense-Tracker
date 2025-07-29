@@ -25,4 +25,5 @@ export const API_PATHS = {
     IMAGE: {
         UPLOAD_IMAGE: "api/v1/auth/upload-image",
     },
+    VERIFY: { VERIFY: "api/v1/auth/verify" },
 };

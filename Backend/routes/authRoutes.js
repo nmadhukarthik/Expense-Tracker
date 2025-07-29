@@ -21,5 +21,7 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
     }`;
     res.status(200).json({ message: "File uploaded successfully", imageUrl });
 });
-
+router.get("/verify", protect, (req, res) => {
+    res.status(200).json({ user: req.user }); // Returns user info from token
+});
 export default router;
