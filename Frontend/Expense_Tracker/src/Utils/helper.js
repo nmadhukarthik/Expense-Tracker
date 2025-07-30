@@ -74,7 +74,7 @@ export const prepareIncomeChartData = (data = []) => {
     return chartData;
 };
 
-export const prepareExpenseLineChartData = (data = []) => {
+export const prepareExpenseLineChartData1 = (data = []) => {
     const sortedData = [...data].sort(
         (a, b) => new Date(a.date) - new Date(b.date)
     );
@@ -84,5 +84,36 @@ export const prepareExpenseLineChartData = (data = []) => {
         amount: item?.amount,
         category: item?.category,
     }));
+    return chartData;
+};
+
+export const prepareExpenseLineChartData = (data = []) => {
+    // Step 1: Sort data by date
+    const sortedData = [...data].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+    );
+
+    // Step 2: Group by day and sum amounts
+    const grouped = sortedData.reduce((acc, curr) => {
+        const day = moment(curr.date).format("YYYY-MM-DD");
+        if (!acc[day]) {
+            acc[day] = {
+                date: curr.date,
+                amount: 0,
+            };
+        }
+        acc[day].amount += curr.amount;
+        return acc;
+    }, {});
+
+    // Step 3: Convert to chart format
+
+    const chartData = Object.entries(grouped).map(
+        ([day, { date, amount }]) => ({
+            month: moment(date).format("Do MMM"),
+            amount: amount,
+        })
+    );
+
     return chartData;
 };

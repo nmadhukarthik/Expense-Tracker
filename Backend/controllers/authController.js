@@ -2,7 +2,7 @@ import User from "../models/Users.js";
 import jwt from "jsonwebtoken";
 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1min" });
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
 
 // Register user
@@ -11,6 +11,12 @@ export const registerUser = async (req, res) => {
 
     if (!fullName || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
+    }
+
+    if (password.length !== 8) {
+        return res
+            .status(400)
+            .json({ message: "Password should have minimum 8 characters" });
     }
 
     try {
