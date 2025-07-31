@@ -10,7 +10,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import Home from "./Pages/Dashboard/Home";
 import Income from "./Pages/Dashboard/Income";
 import Expense from "./Pages/Dashboard/Expense";
-import UserProvider, { userContext } from "./Context/UserContext";
+import { userContext } from "./Context/UserContext";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
 
     if (loading) return <div>Loading...</div>; // prevents redirect loop
     return (
-        <UserProvider>
+        <>
             <Router>
                 <Routes>
                     <Route
@@ -55,7 +55,7 @@ const App = () => {
                     },
                 }}
             />
-        </UserProvider>
+        </>
     );
 };
 

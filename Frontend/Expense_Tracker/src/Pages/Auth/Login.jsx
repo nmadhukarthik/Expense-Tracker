@@ -37,8 +37,8 @@ const Login = () => {
                 password,
             });
             const { token, user } = response.data;
-            console.log(user);
-            if (token) {
+            // console.log(user);
+            if (token && user) {
                 // setTimeout(() => {
                 //     if (
                 //         window.location.pathname === "/login" ||
@@ -51,6 +51,8 @@ const Login = () => {
                 //     }
                 // }, 1000);
                 localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(user));
+                // console.log("Token Saved:", localStorage.getItem("token"));
                 updateUser(user);
                 navigate("/dashboard");
             }

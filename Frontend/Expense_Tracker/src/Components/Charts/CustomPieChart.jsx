@@ -19,9 +19,9 @@ const CustomPieChart = ({
     colors,
     showTextAnchor,
 }) => {
-    console.log("totalAmount:", totalAmount);
+    // console.log("totalAmount:", totalAmount);
     const amount = addThousandsSeperator(totalAmount);
-    console.log(amount);
+    // console.log(amount);
     return (
         <ResponsiveContainer width="100%" height={380}>
             <PieChart>

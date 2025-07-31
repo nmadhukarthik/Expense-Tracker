@@ -31,7 +31,7 @@ export const addThousandsSeperator1 = (num) => {
 };
 
 export const addThousandsSeperator = (num) => {
-    console.log("Input to addThousandsSeperator:", num);
+    // console.log("Input to addThousandsSeperator:", num);
 
     if (num === null || num === undefined) return "";
 
@@ -66,11 +66,32 @@ export const prepareIncomeChartData = (data = []) => {
         (a, b) => new Date(a.date) - new Date(b.date)
     );
 
-    const chartData = sortedData.map((item) => ({
-        month: moment(item?.date).format("Do MMM"),
-        amount: item?.amount,
-        source: item?.source,
-    }));
+    const grouped = sortedData.reduce((acc, curr) => {
+        const day = moment(curr.date).format("YYYY-MM-DD");
+        if (!acc[day]) {
+            acc[day] = {
+                date: curr.date,
+                amount: 0,
+            };
+        }
+        acc[day].amount += curr.amount;
+        return acc;
+    }, {});
+
+    // Step 3: Convert to chart format
+
+    const chartData = Object.entries(grouped).map(
+        ([day, { date, amount }]) => ({
+            month: moment(date).format("Do MMM"),
+            amount: amount,
+        })
+    );
+
+    // const chartData = sortedData.map((item) => ({
+    //     month: moment(item?.date).format("Do MMM"),
+    //     amount: item?.amount,
+    //     source: item?.source,
+    // }));
     return chartData;
 };
 
