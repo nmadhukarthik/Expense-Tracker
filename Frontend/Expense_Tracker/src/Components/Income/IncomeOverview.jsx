@@ -7,7 +7,7 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
     const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
-        console.log("Transactions passed to IncomeOverview:", transactions);
+        // console.log("Transactions passed to IncomeOverview:", transactions);
         const result = prepareIncomeChartData(transactions);
         setChartData(result);
         return () => {};

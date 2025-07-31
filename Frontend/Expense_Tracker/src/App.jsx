@@ -12,6 +12,7 @@ import Income from "./Pages/Dashboard/Income";
 import Expense from "./Pages/Dashboard/Expense";
 import { userContext } from "./Context/UserContext";
 import { Toaster } from "react-hot-toast";
+import Logout from "./Pages/Auth/Logout";
 
 const App = () => {
     const { user, loading } = useContext(userContext);
@@ -44,6 +45,7 @@ const App = () => {
                     <Route path="/dashboard" exact element={<Home />} />
                     <Route path="/income" exact element={<Income />} />
                     <Route path="/expense" exact element={<Expense />} />
+                    <Route path="/logout" element={<Logout />} />
                 </Routes>
             </Router>
 
