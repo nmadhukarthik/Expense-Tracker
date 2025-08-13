@@ -11,6 +11,7 @@ import {
 import CustomTooltip from "./CustomTooltip";
 
 const CustomLineChart = ({ data }) => {
+    console.log(data);
     return (
         <div className="">
             <ResponsiveContainer width="100%" height={300}>
@@ -45,6 +46,7 @@ const CustomLineChart = ({ data }) => {
                     <YAxis
                         tick={{ fontSize: 12, fill: "#555" }}
                         stroke="none"
+                        domain={["amountMin", "auto"]}
                     />
                     <Tooltip content={<CustomTooltip />} />
                     <Area
