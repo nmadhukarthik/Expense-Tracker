@@ -132,7 +132,7 @@ export const prepareExpenseLineChartData = (data = []) => {
     const chartData = Object.entries(grouped).map(
         ([day, { date, amount }]) => ({
             month: moment(date).format("Do MMM"),
-            amount: amount,
+            amount: amount.toFixed(2),
         })
     );
 

@@ -22,6 +22,7 @@ const App = () => {
         <>
             <Router>
                 <Routes>
+                    <Route path="*" element={<Login />} />
                     <Route
                         path="/"
                         element={
