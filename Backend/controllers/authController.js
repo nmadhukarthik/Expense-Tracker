@@ -13,7 +13,7 @@ export const registerUser = async (req, res) => {
         return res.status(400).json({ message: "All fields are required" });
     }
 
-    if (password.length !== 8) {
+    if (password.length < 8) {
         return res
             .status(400)
             .json({ message: "Password should have minimum 8 characters" });

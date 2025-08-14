@@ -8,7 +8,14 @@ const ExpenseList = ({ transactions, onDelete, onDownload }) => {
         <div className="card">
             <div className="flex items-ceter justify-between">
                 <h5 className="text-lg">Expense Categories</h5>
-                <button className="card-btn" onClick={onDownload}>
+                <button
+                    className={`card-btn ${
+                        transactions.length > 0
+                            ? ""
+                            : "bg-gray-400 text-gray-200 cursor-not-allowed pointer-events-none"
+                    }`}
+                    onClick={onDownload}
+                >
                     <LuDownload className="text-base" />
                     Download
                 </button>

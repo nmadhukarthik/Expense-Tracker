@@ -29,7 +29,13 @@ const ExpenseOverview = ({ transactions, onAddExpense }) => {
             </div>
 
             <div className="mt-10">
-                <CustomLineChart data={chartData} />
+                {chartData.length === 0 ? (
+                    <div className="text-gray-400 text-center">
+                        No Expense data to display
+                    </div>
+                ) : (
+                    <CustomLineChart data={chartData} />
+                )}
             </div>
         </div>
     );
